@@ -74,6 +74,51 @@ sidebarLinks.forEach(link => {
     });
 });
 
+const apiKey = '26eab6d8064d2f6ab0e3f7815e19690d';
+
+// const apiKey = 'YOUR_API_KEY';
+const favPlaces = <?php echo json_encode($favPlaces); ?>;
+
+favPlaces.forEach((place, index) => {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${place.location}&appid=${apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            const placeElement = document.querySelector(`.place${index + 1} .info`);
+            if (placeElement) {
+                placeElement.innerHTML += `
+                    <h4>Temperature: ${Math.round(data.main.temp - 273.15)}°C</h4>
+                    <h4>Condition: ${data.weather[0].description}</h4>
+                `;
+            }
+        })
+        .catch(error => console.error('Error fetching weather data:', error));
+});
+
+
+
+
+fetch(`https://api.openweathermap.org/data/2.5/alerts?q=${currentLocation}&appid=${apiKey}`)
+    .then(response => response.json())
+    .then(data => {
+        const notifications = data.alerts.slice(0, 5); // Get the latest 5 alerts
+        const notificationsList = document.querySelector('.notifications-list');
+        notifications.forEach(alert => {
+            notificationsList.innerHTML += `
+                <div class="notification">
+                    <span class="material-symbols-outlined">warning</span>
+                    <div>
+                        <p><b>${alert.event}:</b> ${alert.description}</p>
+                        <small class="text-muted">${new Date(alert.start * 1000).toLocaleString()}</small>
+                    </div>
+                </div>
+            `;
+        });
+    })
+    .catch(error => console.error('Error fetching notifications:', error));
+
+
+
+
 
 
 

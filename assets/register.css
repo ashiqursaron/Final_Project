@@ -50,21 +50,36 @@ body {
   justify-content: center;
   align-items: center;
   padding: 10px;
-  background: linear-gradient(135deg, var(--first-color), var(--first-color-alt));
-  background-image: url('./images/cat.jpg');
+  /* background: linear-gradient(135deg, var(--first-color), var(--first-color-alt)); */
+  background: #fff;
+  /* background-image: url('./images/cat.jpg'); */
   background-size: cover;         /* Make image cover the viewport */
   background-position: center;    
   background-repeat: no-repeat;  
  } 
 
-
+/* Place SVG as background */
+.login_blob {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 400px;      /* Adjust size as needed */
+  height: 600px;     /* Adjust size as needed */
+  transform: scale(1.2);           /* Zoom in */
+  transform-origin: bottom right;  /* Anchor zoom to bottom right */
+  
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.7;      /* Optional: make it subtle */
+}
 /* Container styling */
 .container {
   max-width: 1200px;
   width: 100%;
   /* Use a semi-transparent background with a root color */
   backdrop-filter: blur(5px);
-  background-color: hsla(208, 92%, 54%, 0.10); /* 0.15 = 15% opacity, adjust as needed */
+  /* background-color: hsla(208, 92%, 54%, 0.10);  */
+  background-color: hwb(210 97% 2% / 0.1);
   padding: 25px 30px;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
@@ -79,7 +94,7 @@ body {
   font-size: 25px;
   font-weight: 500;
   margin-top: 10px;
-  color: var(--white-color);
+  color: var(--first-color);
   position: relative;
 }
 
@@ -197,14 +212,14 @@ form .category label .dot {
 #dot-1:checked~.category label .one,
 #dot-2:checked~.category label .two,
 #dot-3:checked~.category label .three {
-  background: var(--input-focus);
-  border-color: var(--white-color);
+  background: var(--white-color);
+  border-color: var(--first-color);
 }
 
 /* Fix radio checked dot color */
 form input[type="radio"]:checked + .dot {
-  background: var(--input-focus);
-  border-color: var(--input-border);
+  background: var(--first-color-alt);
+  border-color: var(--white-color);
 }
 
 form input[type="radio"] {
@@ -214,12 +229,13 @@ form input[type="radio"] {
 form .button {
   height: 45px;
   margin: 10px 0
+  
 }
 
 form .button input {
   height: 100%;
   width: 100%;
-  border-radius: 5px;
+  border-radius: 20px;
   border: none;
   color: #fff;
   font-size: 18px;
@@ -231,9 +247,9 @@ form .button input {
   background: var(--first-color);
 }
 
-form .button input:hover {
+/* form .button input:hover {
   background: linear-gradient(-135deg, #71b7e6, #9b59b6);
-}
+} */
 
 /* Back to login link styling */
 
@@ -250,7 +266,7 @@ form .button input:hover {
   transition: color .4s;
 }
 .login_signup-link:hover {
-  color: var(--white-color);
+  color: var(--first-color-alt);
 }
 
 

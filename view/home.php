@@ -1,6 +1,38 @@
 <?php
     session_start();
-    if(isset($_COOKIE['status'])){
+    // // Fetch favorite places
+    // $favPlacesSql = "SELECT * FROM favourite_places WHERE user_id = ? LIMIT 5";
+    // $stmtFavPlaces = $conn->prepare($favPlacesSql);
+    // $stmtFavPlaces->bind_param("i", $userId);
+    // $stmtFavPlaces->execute();
+    // $favPlacesResult = $stmtFavPlaces->get_result();
+    // $favPlaces = [];
+    // while ($row = $favPlacesResult->fetch_assoc()) {
+    //     $favPlaces[] = $row;
+    // }
+    // $stmtFavPlaces->close();
+
+    // // Check if user already has 5 favorite places
+    // $checkFavCountSql = "SELECT COUNT(*) AS fav_count FROM favourite_places WHERE user_id = ?";
+    // $stmtCheckFavCount = $conn->prepare($checkFavCountSql);
+    // $stmtCheckFavCount->bind_param("i", $userId);
+    // $stmtCheckFavCount->execute();
+    // $favCountResult = $stmtCheckFavCount->get_result();
+    // $favCount = $favCountResult->fetch_assoc()['fav_count'];
+    // $stmtCheckFavCount->close();
+
+    // if ($favCount >= 5) {
+    //     echo "You can only have up to 5 favorite places.";
+    //     exit();
+    // }
+
+
+
+
+
+
+
+    if(isset($_SESSION['status']) || isset($_COOKIE['status'])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -510,41 +542,69 @@
             </div>
             <!-- End of Notifications -->
             <!-- right side favourite places -->
-            <div class="favourite-places">
-                <h2>
-                    Favourite Places
-                </h2>
+
+            <!-- <div class="favourite-places"> -->
+                <!-- <h2> -->
+                    <!-- Favourite Places -->
+                <!-- </h2> -->
                 <!-- favourite place 1 -->
-                <div class="favourite-place place1">
+                <!-- <div class="favourite-place place1"> -->
                     <!-- favourite place 1 icon -->
-                    <div class="icon">
-                        <span class="material-symbols-outlined">home</span>
-                    </div>
+                    <!-- <div class="icon"> -->
+                        <!-- <span class="material-symbols-outlined">home</span> -->
+                    <!-- </div> -->
                     <!-- favourite place 1 middle portion -->
-                    <div class="middle">
+                    <!-- <div class="middle"> -->
                         <!-- favourite place 1 info in middle portion -->
-                        <div class="info">
-                            <h2>HOME</h2>
-                            <h4><b>30 &deg</b></h4>
-                            <h4>Extra Cloudy</h4>
+                        <!-- <div class="info"> -->
+                            <!-- <h2>HOME</h2> -->
+                            <!-- <h4><b>30 &deg</b></h4> -->
+                            <!-- <h4>Extra Cloudy</h4> -->
+                        <!-- </div> -->
+                    <!-- </div> -->
+                    <!-- favourite place 1 right portion -->
+                    <!-- <div class="right"> -->
+                        <!-- favourite place 1 right portion icon -->
+                        <!-- <span class="material-symbols-outlined">sunny</span> -->
+                    <!-- </div> -->
+
+                <!-- </div> -->
+                <!-- favourite place add section -->
+                <!-- <div class="favourite-place add"> -->
+                    <!-- favourite place add section add icon -->
+                    <!-- <div> -->
+                        <!-- <span class="material-symbols-outlined">add</span> -->
+                        <!-- <h3>Add Place</h3> -->
+                    <!-- </div> -->
+                <!-- </div> -->
+            <!-- </div> -->
+             <div class="favourite-places">
+                <h2>Favourite Places</h2>
+                <?php foreach ($favPlaces as $index => $place): ?>
+                    <div class="favourite-place place<?php echo $index + 1; ?>">
+                        <div class="icon">
+                            <span class="material-symbols-outlined">home</span>
+                        </div>
+                        <div class="middle">
+                            <div class="info">
+                                <h2><?php echo htmlspecialchars($place['place_name']); ?></h2>
+                                <h4><b><?php echo htmlspecialchars($place['location']); ?></b></h4>
+                            </div>
                         </div>
                     </div>
-                    <!-- favourite place 1 right portion -->
-                    <div class="right">
-                        <!-- favourite place 1 right portion icon -->
-                        <span class="material-symbols-outlined">sunny</span>
+                <?php endforeach; ?>
+                <?php if (count($favPlaces) < 5): ?>
+                    <div class="favourite-place add">
+                        <div>
+                            <span class="material-symbols-outlined">add</span>
+                            <h3>Add Place</h3>
+                        </div>
                     </div>
-
-                </div>
-                <!-- favourite place add section -->
-                <div class="favourite-place add">
-                    <!-- favourite place add section add icon -->
-                    <div>
-                        <span class="material-symbols-outlined">add</span>
-                        <h3>Add Place</h3>
-                    </div>
-                </div>
+                <?php endif; ?>
             </div>
+
+
+            <!-- end of favourite place -->
         </div>
     </div>
     <script src="../assets/dashboard.js"></script>

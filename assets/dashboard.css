@@ -132,18 +132,23 @@ aside {
     /* grid-column: 1; */
     /* extra chatgpt generated code */
     position: fixed; /* Ensure it stays in place */
-    /* left: -100%; Default position */
+    left: 0; 
+    top: 0;
     /* top: 0; */
     width: 14rem;
-    padding-right: 1rem;
+    /* padding-right: 1rem; */
+    padding: 0; /* Padding inside the sidebar */
+    margin: 0;
+
     z-index: 3;
     box-shadow: 1rem 3rem 4rem var(--color-light);
     padding-right: var(--color-light);
-    display: block;
+    display: none;
     background: var(--color-white);
     /* transition: transform 0.3s ease; Add transition for smooth animation */
     /* transform: translateX(0); Default position */
     animation: showMenu 300ms ease;
+    /* align-items: left; */
 }
 
 /* aside.show { */
@@ -212,7 +217,7 @@ aside h3{
 aside .sidebar a {
     display: flex;
     color: var(--color-info-dark);
-    margin-left: 2rem;
+    margin-left: 0rem;
     gap: 1rem;
     align-items: center;
     position: relative;
